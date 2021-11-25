@@ -1,0 +1,6 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  AWS_LAMBDA_JS_RUNTIME = "nodejs14.x"

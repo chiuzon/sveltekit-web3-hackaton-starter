@@ -9,7 +9,7 @@ import { ERC20_CONTRACT } from "$lib/constants";
 
 
 export const providerOrSigner = derived(svelteWeb3().library, ($lib) => {
-    if(!$lib || !$lib.getSigner()){
+    if(!$lib){
         return new ethers.providers.JsonRpcProvider("https://rpc-mainnet.maticvigil.com/")
     }
     
@@ -44,7 +44,7 @@ export function erc20(address: string) {
 
     const contract = erc20Contract(address)
 
-    const decimals = derived(contract, ($contract, set) => {
+    const decimals = derived([contract], ($contract, set) => {
         if(!$contract){
             return null
         }

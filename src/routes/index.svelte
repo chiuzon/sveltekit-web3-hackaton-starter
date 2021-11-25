@@ -12,14 +12,20 @@
     $: address = ethers.utils.isAddress(addressFormInput) ? addressFormInput : ''
 
     //Recreating based on input
-    $: ({decimals, contract} = erc20(address))
-
+    $: ({decimals, contract, balanceOf} = erc20(address))
+    
+    //Feth the balance it recreates when the address changes
+    $: balance = balanceOf(address)
+    
     $: console.log($decimals)
 </script>
 
 <input bind:value={addressFormInput} />
 
 {#if $contract}
+    
+    {$balance}
+
     {_if($decimals, `Contract has: ${$decimals}`)}
 {/if}
 

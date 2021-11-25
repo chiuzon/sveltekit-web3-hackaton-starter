@@ -27,7 +27,7 @@ export const contractStore = (address: string, abi: any[]) => {
             console.error("!ADDRESS")
             return null
         }
-        
+
         try{
             return new ethers.Contract(address, abi, $providerOrSigner)
         }catch{
@@ -51,9 +51,20 @@ export function erc20(address: string) {
 
         $contract.decimals().then((result) => set(result)).catch((e) => set(e))
     }, null)
+
+    function balanceOf(address: string){
+        return derived(contract, ($contract, set) => {
+            if(!$contract){
+                return null
+            }
+
+            $contract.balanceOf(address).then((result) => set(result)).catch((e) => set(null))
+        }, null)
+    }
     
     return {
         contract,
-        decimals
+        decimals,
+        balanceOf
     }
 }

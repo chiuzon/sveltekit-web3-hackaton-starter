@@ -5,3 +5,4 @@ export function _if(condition: any, object: any, whenFalse?: any){
         return whenFalse ?? ''
     }
 }
+

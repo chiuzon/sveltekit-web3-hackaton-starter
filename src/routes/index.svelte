@@ -2,24 +2,23 @@
 	import { svelteWeb3 } from '@chiuzon/svelteweb3'
     const { error, account } = svelteWeb3()
 
-    import {erc20, providerOrSigner, erc20Contract} from '$lib/stores/contractStores'
-    import { onMount } from 'svelte';
+    import {erc20} from '$lib/stores/contractStores'
     import { _if } from '$lib/helpers/renderHelper';
+    import { ethers } from 'ethers';
 
-    let address = "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"
+    let addressFormInput = ""
 
-    const {decimals, contract} = erc20(address)
+    //Validating
+    $: address = ethers.utils.isAddress(addressFormInput) ? addressFormInput : ''
 
-    onMount(() => {
-        console.log($contract)
-    })
+    //Recreating based on input
+    $: ({decimals, contract} = erc20(address))
 
-    $: console.log($contract)
-    $: console.log($providerOrSigner)
+    $: console.log($decimals)
 </script>
 
+<input bind:value={addressFormInput} />
 
-<p>Decimals</p>
 {#if $contract}
     {_if($decimals, `Contract has: ${$decimals}`)}
 {/if}

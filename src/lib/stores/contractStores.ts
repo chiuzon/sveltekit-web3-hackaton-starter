@@ -23,12 +23,16 @@ export const contractStore = (address: string, abi: any[]) => {
             return null
         }
 
-        if(address.length <= 0){
+        if(address?.length <= 0){
             console.error("!ADDRESS")
             return null
         }
-
-        return new ethers.Contract(address, abi, $providerOrSigner)
+        
+        try{
+            return new ethers.Contract(address, abi, $providerOrSigner)
+        }catch{
+            return null
+        }
     })
 }
 

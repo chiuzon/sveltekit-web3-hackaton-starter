@@ -1,2 +1,1 @@
-# sveltekit-web3-hackaton-starter
-Sveletekit starter for web3 hackatons
+# !! Depracated, please use: [https://github.com/chiuzon/sveltekit-evm-bootstrap](https://github.com/chiuzon/sveltekit-evm-bootstrap)
